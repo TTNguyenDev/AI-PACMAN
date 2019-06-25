@@ -59,7 +59,7 @@ def setup_level(level,height,width):
                 coin.goto(screen_x,screen_y)
                 coin.stamp()
                 coins.append((screen_x,screen_y))
-            elif char =="P":
+            elif char == "P":
                 player.goto(screen_x,screen_y)
 
 
@@ -68,11 +68,11 @@ def readFILE(arr,path):
     file = open(path, "r")
     hw = []
     hw.append(file.readline().split())
-    width = int(hw[0][0])
-    height = int(hw[0][1])
+    height = int(hw[0][0])
+    width = int(hw[0][1])
     l = 1
     for line in file:
-        if l <= height:
+        if l <= width:
             arr.append(line.split())
             l = l + 1
         else:
