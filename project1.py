@@ -64,6 +64,7 @@ def setup_level(level,height,width):
 
 
 def readFILE(arr,path):
+    pos = []
     global height, width
     file = open(path, "r")
     hw = []
@@ -96,7 +97,6 @@ if __name__=="__main__":
     coins = []
     height = 0
     width = 0
-    pos=[]
     wall = Wall()
     coin = Coin()
     player = Player()
