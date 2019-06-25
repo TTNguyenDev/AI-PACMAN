@@ -1,5 +1,10 @@
 # AI-PACMAN
 chạy file project1.py
+#0 road
+#1 wall
+#2 coin
+#3 ghost
+#P pacman
 Trong file .txt
 Trong dòng đầu tiên: width - height
 Các dòng tiếp theo là map
