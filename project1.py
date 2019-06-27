@@ -10,7 +10,14 @@ def _Screen():
     wm.bgcolor("black")
     wm.title("PACMAN")
     wm.setup(750,550)
-
+def NextLevelScreen():
+    wm =turtle.Screen()
+    wm.bgpic("next.gif")
+    wm.bgcolor("black")
+    wm.title("PACMAN")
+    wm.setup(750,550)
+    time.sleep(1.5)
+    wm.clear()
 class Wall(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
@@ -96,25 +103,25 @@ def Move(maze,x,y,add):
             player.goto(x-24,y)
             white.goto(x,y)
             white.stamp()
-            time.sleep(0.5)
+            time.sleep(0.7)
             x=x-24
         if (add[i] == "R"):
             player.goto(x + 24, y)
             white.goto(x, y)
             white.stamp()
-            time.sleep(0.5)
+            time.sleep(0.7)
             x = x + 24
         if (add[i] == "U"):
             player.goto(x, y+24)
             white.goto(x, y)
             white.stamp()
-            time.sleep(0.5)
+            time.sleep(0.7)
             y = y + 24
         if (add[i] == "D"):
             player.goto(x , y - 24)
             white.goto(x, y)
             white.stamp()
-            time.sleep(0.5)
+            time.sleep(0.7)
             y = y - 24
 
 def readFILE(arr,path,pos,coins1):
@@ -142,7 +149,11 @@ def readFILE(arr,path,pos,coins1):
                 coins1.append((y,x))
     file.close()
     return
-
+def writeFile(starttime,endtime,map="",level=""):
+    f=open("output.txt","a")
+    res=endtime-starttime
+    f.writelines("Map "+map+" level "+level+": "+str(res)+"\n")
+    f.close()
 def updateScore():
     global scores
     s = turtle.Turtle()
@@ -259,119 +270,149 @@ def level1_map1(level,pos,coin1):
     global add
     readFILE(level, "input1.txt",pos,coins1)
     setup_level(level, height, width,pos1)
+    starttime=time.time()
     while not findEnd(level, add):  # nếu chưa chạm đích thì tiếp tục
         add = nums.get()
         for j in ["L", "R", "U", "D"]:
             put = add + j
             if valid(level, put):
                 nums.put(put)
+    endtime=time.time()
+    writeFile(starttime,endtime,str(1),str(1))
     Move(level, int(pos1[0][0]), int(pos1[0][1]),add)
 
 def level2_map1(level1,pos,coins1):
     global add2
     readFILE(level1, "input1_2.txt",pos,coins1)
     setup_level(level1, height, width,pos1_2)
+    starttime = time.time()
     while not findEnd(level1, add2):  # nếu chưa chạm đích thì tiếp tục
         add2 = nums2.get()
         for j in ["L", "R", "U", "D"]:
             put = add2 + j
             if valid(level1, put):
                 nums2.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(1), str(2)) #map -> level
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
 
 def level1_map2(level1,pos,coins1):
     global add
     readFILE(level1, "input2.txt",pos,coins1)
     setup_level(level1, height, width,pos1)
+    starttime = time.time()
     while not findEnd(level1, add):  # nếu chưa chạm đích thì tiếp tục
         add = nums.get()
         for j in ["L", "R", "U", "D"]:
             put = add + j
             if valid(level1, put):
                 nums.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(2), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
 
 def level2_map2(level1,pos,coins1):
     global add2
     readFILE(level1, "input2_2.txt",pos,coins1)
     setup_level(level1, height, width,pos1_2)
+    starttime = time.time()
     while not findEnd(level1, add2):  # nếu chưa chạm đích thì tiếp tục
         add2 = nums2.get()
         for j in ["L", "R", "U", "D"]:
             put = add2 + j
             if valid(level1, put):
                 nums2.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(2), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
 
 def level1_map3(level1,pos,coins1):
     global add
     readFILE(level1, "input3.txt",pos,coins1)
     setup_level(level1, height, width,pos1)
+    starttime = time.time()
     while not findEnd(level1, add):  # nếu chưa chạm đích thì tiếp tục
         add = nums.get()
         for j in ["L", "R", "U", "D"]:
             put = add + j
             if valid(level1, put):
                 nums.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(3), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
 
 def level2_map3(level1,pos,coins1):
     global add2
     readFILE(level1, "input3_2.txt",pos,coins1)
     setup_level(level1, height, width,pos1_2)
+    starttime = time.time()
     while not findEnd(level1, add2):  # nếu chưa chạm đích thì tiếp tục
         add2 = nums2.get()
         for j in ["L", "R", "U", "D"]:
             put = add2 + j
             if valid(level1, put):
                 nums2.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(3), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
 def level1_map4(level1,pos,coins1):
     global add
     readFILE(level1, "input4.txt",pos,coins1)
     setup_level(level1, height, width,pos1)
+    starttime = time.time()
     while not findEnd(level1, add):  # nếu chưa chạm đích thì tiếp tục
         add = nums.get()
         for j in ["L", "R", "U", "D"]:
             put = add + j
             if valid(level1, put):
                 nums.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(4), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
 
 def level2_map4(level1,pos,coins1):
     global add2
     readFILE(level1, "input4_2.txt",pos,coins1)
     setup_level(level1, height, width,pos1_2)
+    starttime = time.time()
     while not findEnd(level1, add2):  # nếu chưa chạm đích thì tiếp tục
         add2 = nums2.get()
         for j in ["L", "R", "U", "D"]:
             put = add2 + j
             if valid(level1, put):
                 nums2.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(4), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
 
 def level1_map5(level1,pos,coins1):
     global add
     readFILE(level1, "input5.txt",pos,coins1)
     setup_level(level1, height, width,pos1)
+    starttime = time.time()
     while not findEnd(level1, add):  # nếu chưa chạm đích thì tiếp tục
         add = nums.get()
         for j in ["L", "R", "U", "D"]:
             put = add + j
             if valid(level1, put):
                 nums.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(5), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
 
 def level2_map5(level1,pos,coins1):
     global add2
     readFILE(level1, "input5_2.txt",pos,coins1)
     setup_level(level1, height, width,pos1_2)
+    starttime = time.time()
     while not findEnd(level1, add2):  # nếu chưa chạm đích thì tiếp tục
         add2 = nums2.get()
         for j in ["L", "R", "U", "D"]:
             put = add2 + j
             if valid(level1, put):
                 nums2.put(put)
+    endtime = time.time()
+    writeFile(starttime, endtime, str(5), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
 
 if __name__=="__main__":
@@ -412,6 +453,7 @@ if __name__=="__main__":
         level1_map1(level1,pos,coins1)
         time.sleep(1)
         Screen().clear()
+        NextLevelScreen()
         _Screen()
         coin = Coin()
         wall = Wall()
@@ -422,6 +464,7 @@ if __name__=="__main__":
         level1_map2(level1,pos,coins1)
         time.sleep(1)
         Screen().clear()
+        NextLevelScreen()
         _Screen()
         coin = Coin()
         wall = Wall()
@@ -432,6 +475,7 @@ if __name__=="__main__":
         level1_map3(level1,pos,coins1)
         time.sleep(1)
         Screen().clear()
+        NextLevelScreen()
         _Screen()
         coin = Coin()
         wall = Wall()
@@ -442,6 +486,7 @@ if __name__=="__main__":
         level1_map4(level1,pos,coins1)
         time.sleep(1)
         Screen().clear()
+        NextLevelScreen()
         _Screen()
         coin = Coin()
         wall = Wall()
@@ -452,6 +497,7 @@ if __name__=="__main__":
         level1_map5(level1,pos,coins1)
         time.sleep(1)
         Screen().clear()
+        NextLevelScreen()
         _Screen()
         coin = Coin()
         wall = Wall()
