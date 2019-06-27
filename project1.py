@@ -156,17 +156,17 @@ def updateScore():
         scores +=1
         time.sleep(0.5)
         s.clear()
-
+#For Debug
 def printMaze(maze, path=""):
-    global i, j, start, start
+    global i, j, column, row
     for index in range(len(maze)):
         for x, pos in enumerate(maze[index]):
             if pos == "P":
-                start = x
-                start_ = index
+                column = x
+                row = index
 
-    i = start
-    j = start_
+    i = column
+    j = row
     pos = set()
     for move in path:
         if move == "L":
@@ -191,50 +191,28 @@ def printMaze(maze, path=""):
                 print(col + " ", end="")
         print()
 
-
 def valid(maze, moves):
-    global i, j, start, start_
-    for index in range(len(maze)):
-         for x, pos in enumerate(maze[index]):
-             if pos == "P":
-                 start = x
-                 start_ = index
+    i, j = updatePacmanPosition(maze, moves)
 
-    i = start
-    j = start_
-    for move in moves:
-        if move == "L":
-            i -= 1
-
-        elif move == "R":
-            i += 1
-
-        elif move == "U":
-            j -= 1
-
-        elif move == "D":
-            j += 1
-
-        if not (0 <= i < len(maze[0]) and 0 <= j < len(maze)):
-            return False
-        elif (maze[j][i] == "1"):
-            return False
-        elif (maze[j][i] == "3"):
-            return False
+    if not (0 <= i < len(maze[0]) and 0 <= j < len(maze)):
+        return False
+    elif (maze[j][i] == "1"):
+        return False
+    elif (maze[j][i] == "3"):
+        return False
 
     return True
 
-
-def findEnd(maze, moves):
-    global i,j,start,start_
+def updatePacmanPosition(maze, moves):
+    global i, j, column, row
     for index in range(len(maze)):
         for x, pos in enumerate(maze[index]):
             if pos == "P":
-                start = x
-                start_ = index
+                column = x
+                row = index
 
-    i = start
-    j = start_
+    i = column
+    j = row
     for move in moves:
         if move == "L":
             i -= 1
@@ -248,9 +226,12 @@ def findEnd(maze, moves):
         elif move == "D":
             j += 1
 
+    return i, j
+
+def findEnd(maze, moves):
+    i, j = updatePacmanPosition(maze, moves)
+
     if maze[j][i] == "2":
-        #print("Found: " + moves)
-        #printMaze(maze, moves)
         return True
 
     return False
