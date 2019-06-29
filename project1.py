@@ -156,82 +156,48 @@ def updateScore():
         scores +=1
         time.sleep(0.5)
         s.clear()
-#For Debug
-def printMaze(maze, path=""):
-    global i, j, column, row
-    for index in range(len(maze)):
-        for x, pos in enumerate(maze[index]):
-            if pos == "P":
-                column = x
-                row = index
 
-    i = column
-    j = row
-    pos = set()
-    for move in path:
-        if move == "L":
-            i -= 1
+def valid(map, moves):
+    column, row = updatePacmanPosition(map, moves)
 
-        elif move == "R":
-            i += 1
-
-        elif move == "U":
-            j -= 1
-
-        elif move == "D":
-            j += 1
-        pos.add((j, i))
-
-    for j, row in enumerate(maze):
-        for i, col in enumerate(row):
-            if (j, i) in pos:
-                maze[j][i]="+"
-                print("+ ", end="")
-            else:
-                print(col + " ", end="")
-        print()
-
-def valid(maze, moves):
-    i, j = updatePacmanPosition(maze, moves)
-
-    if not (0 <= i < len(maze[0]) and 0 <= j < len(maze)):
+    #out of range
+    if not (0 <= column < len(map[0]) and 0 <= row < len(map)):
         return False
-    elif (maze[j][i] == "1"):
+    elif (map[row][column] == "1"): #1 represent wall
         return False
-    elif (maze[j][i] == "3"):
+    elif (map[row][column] == "3"): #3 represent enemy
         return False
 
     return True
 
-def updatePacmanPosition(maze, moves):
-    global i, j, column, row
-    for index in range(len(maze)):
-        for x, pos in enumerate(maze[index]):
+def updatePacmanPosition(map, moves):
+    global column, row
+    for index in range(len(map)):
+        for x, pos in enumerate(map[index]):
             if pos == "P":
                 column = x
                 row = index
 
-    i = column
-    j = row
     for move in moves:
         if move == "L":
-            i -= 1
+            column -= 1
 
         elif move == "R":
-            i += 1
+            column += 1
 
         elif move == "U":
-            j -= 1
+            row -= 1
 
         elif move == "D":
-            j += 1
+            row += 1
 
-    return i, j
+    return column, row
 
-def findEnd(maze, moves):
-    i, j = updatePacmanPosition(maze, moves)
+def findEnd(map, moves):
+    column, row = updatePacmanPosition(map, moves)
 
-    if maze[j][i] == "2":
+    # 2 represent food
+    if map[row][column] == "2":
         return True
 
     return False
