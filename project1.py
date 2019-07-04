@@ -168,6 +168,23 @@ def updateScore():
         time.sleep(0.5)
         s.clear()
 
+def levelscore(add):
+    global scores
+    i =5
+    s = turtle.Turtle()
+    s.hideturtle()
+    s.penup()
+    s.goto(-110, -260)
+    while i> 0:
+        score = Score()
+        s.write(str(scores), move=False, align="center", font=("Arial", 36, "normal"))
+        s.color("yellow")
+        scores = 20 -(len(add)-1)
+        time.sleep(0.5)
+        s.clear()
+        i-=1
+
+
 def valid(map, moves):
     column, row = updatePacmanPosition(map, moves)
 
@@ -227,6 +244,7 @@ def level1_map1(level,pos,coin1):
     endtime=time.time()
     writeFile(starttime,endtime,str(1),str(1))
     Move(level, int(pos1[0][0]), int(pos1[0][1]),add)
+    levelscore(add)
 
 def level2_map1(level1,pos,coins1):
     global add2
@@ -242,6 +260,7 @@ def level2_map1(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(1), str(2)) #map -> level
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
+    levelscore(add2)
 
 def level1_map2(level1,pos,coins1):
     global add
@@ -257,7 +276,7 @@ def level1_map2(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(2), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
-
+    levelscore(add)
 def level2_map2(level1,pos,coins1):
     global add2
     readFILE(level1, "input2_2.txt",pos,coins1)
@@ -272,6 +291,7 @@ def level2_map2(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(2), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
+    levelscore(add2)
 
 def level1_map3(level1,pos,coins1):
     global add
@@ -287,6 +307,7 @@ def level1_map3(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(3), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
+    levelscore(add)
 
 def level2_map3(level1,pos,coins1):
     global add2
@@ -302,6 +323,7 @@ def level2_map3(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(3), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
+    levelscore(add2)
 def level1_map4(level1,pos,coins1):
     global add
     readFILE(level1, "input4.txt",pos,coins1)
@@ -316,6 +338,7 @@ def level1_map4(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(4), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
+    levelscore(add)
 
 def level2_map4(level1,pos,coins1):
     global add2
@@ -331,6 +354,7 @@ def level2_map4(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(4), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
+    levelscore(add2)
 
 def level1_map5(level1,pos,coins1):
     global add
@@ -346,6 +370,7 @@ def level1_map5(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(5), str(1))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
+    levelscore(add)
 
 def level2_map5(level1,pos,coins1):
     global add2
@@ -361,6 +386,7 @@ def level2_map5(level1,pos,coins1):
     endtime = time.time()
     writeFile(starttime, endtime, str(5), str(2))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
+    levelscore(add2)
 
 if __name__=="__main__":
     _Screen()
@@ -399,6 +425,7 @@ if __name__=="__main__":
     if map == 1:
         level1_map1(level1,pos,coins1)
         time.sleep(1)
+
         Screen().clear()
         NextLevelScreen()
         _Screen()
