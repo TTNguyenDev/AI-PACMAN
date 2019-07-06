@@ -149,10 +149,10 @@ def readFILE(arr,path,pos,coins1):
                 coins1.append((y,x))
     file.close()
     return
-def writeFile(starttime,endtime,map="",level=""):
+def writeFile(starttime,endtime,map="",level="", _lengh=""):
     f=open("output.txt","a")
     res=endtime-starttime
-    f.writelines("Map "+map+" level "+level+": "+str(res)+"\n")
+    f.writelines("Map "+map+" level "+level+": "+str(res)+" lengh: " + _lengh +"\n")
     f.close()
 def updateScore():
     global scores
@@ -242,7 +242,7 @@ def level1_map1(level,pos,coin1):
             if valid(level, put):
                 nums.put(put)
     endtime=time.time()
-    writeFile(starttime,endtime,str(1),str(1))
+    writeFile(starttime,endtime,str(1),str(1),str(len(add)))
     Move(level, int(pos1[0][0]), int(pos1[0][1]),add)
     levelscore(add)
 
@@ -258,7 +258,7 @@ def level2_map1(level1,pos,coins1):
             if valid(level1, put):
                 nums2.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(1), str(2)) #map -> level
+    writeFile(starttime, endtime, str(1), str(2),str(len(add2))) #map -> level
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
     levelscore(add2)
 
@@ -274,7 +274,7 @@ def level1_map2(level1,pos,coins1):
             if valid(level1, put):
                 nums.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(2), str(1))
+    writeFile(starttime, endtime, str(2), str(1),str(len(add)))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
     levelscore(add)
 def level2_map2(level1,pos,coins1):
@@ -289,7 +289,7 @@ def level2_map2(level1,pos,coins1):
             if valid(level1, put):
                 nums2.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(2), str(2))
+    writeFile(starttime, endtime, str(2), str(2),str(len(add2)))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
     levelscore(add2)
 
@@ -305,7 +305,7 @@ def level1_map3(level1,pos,coins1):
             if valid(level1, put):
                 nums.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(3), str(1))
+    writeFile(starttime, endtime, str(3), str(1),str(len(add)))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
     levelscore(add)
 
@@ -321,7 +321,7 @@ def level2_map3(level1,pos,coins1):
             if valid(level1, put):
                 nums2.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(3), str(2))
+    writeFile(starttime, endtime, str(3), str(2),str(len(add2)))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
     levelscore(add2)
 def level1_map4(level1,pos,coins1):
@@ -336,7 +336,7 @@ def level1_map4(level1,pos,coins1):
             if valid(level1, put):
                 nums.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(4), str(1))
+    writeFile(starttime, endtime, str(4), str(1),str(len(add)))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
     levelscore(add)
 
@@ -352,7 +352,7 @@ def level2_map4(level1,pos,coins1):
             if valid(level1, put):
                 nums2.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(4), str(2))
+    writeFile(starttime, endtime, str(4), str(2),str(len(add2)))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
     levelscore(add2)
 
@@ -368,7 +368,7 @@ def level1_map5(level1,pos,coins1):
             if valid(level1, put):
                 nums.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(5), str(1))
+    writeFile(starttime, endtime, str(5), str(1),str(len(add)))
     Move(level1, int(pos1[0][0]), int(pos1[0][1]),add)
     levelscore(add)
 
@@ -384,7 +384,7 @@ def level2_map5(level1,pos,coins1):
             if valid(level1, put):
                 nums2.put(put)
     endtime = time.time()
-    writeFile(starttime, endtime, str(5), str(2))
+    writeFile(starttime, endtime, str(5), str(2),str(len(add2)))
     Move(level1, int(pos1_2[0][0]), int(pos1_2[0][1]),add2)
     levelscore(add2)
 

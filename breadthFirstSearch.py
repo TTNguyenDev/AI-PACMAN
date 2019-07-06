@@ -1,15 +1,42 @@
 import queue
+import time
 
-#just for test
+def createMaze():
+    maze = []
+    maze.append(["#", "#", "#", "#", "#", "O", "#"])
+    maze.append(["#", " ", " ", " ", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", " ", " ", "#"])
+    maze.append(["#", " ", "#", "#", "#", " ", "#"])
+    maze.append(["#", " ", " ", " ", "#", " ", "#"])
+    maze.append(["#", "#", "#", "#", "#", "X", "#"])
+
+    return maze
+
+
+def createMaze2():
+    maze = []
+    maze.append(["#", "#", "#", "#", "#", "O", "#", "#", "#"])
+    maze.append(["#", " ", " ", " ", " ", " ", " ", " ", "#"])
+    maze.append(["#", " ", "#", "#", " ", "#", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", " ", " ", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", "#", " ", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", "#", " ", "#", " ", "#"])
+    maze.append(["#", " ", "#", " ", "#", " ", "#", "#", "#"])
+    maze.append(["#", " ", " ", "X", " ", " ", " ", " ", "#"])
+    maze.append(["#", "#", "#", "#", "#", "#", "#", " ", "#"])
+
+    return maze
+
+
 def printMaze(maze, path=""):
     for index in range(len(maze)):
         for x, pos in enumerate(maze[index]):
-            if pos == "P":
+            if pos == "O":
                 start = x
-                start_ = index
 
     i = start
-    j = start_
+    j = 0
     pos = set()
     for move in path:
         if move == "L":
@@ -36,13 +63,12 @@ def printMaze(maze, path=""):
 
 def valid(maze, moves):
     for index in range(len(maze)):
-         for x, pos in enumerate(maze[index]):
-             if pos == "P":
-                 start = x
-                 start_ = index
+        for x, pos in enumerate(maze[index]):
+            if pos == "O":
+                start = x
 
     i = start
-    j = start_
+    j = 0
     for move in moves:
         if move == "L":
             i -= 1
@@ -58,21 +84,20 @@ def valid(maze, moves):
 
         if not (0 <= i < len(maze[0]) and 0 <= j < len(maze)):
             return False
-        elif (maze[j][i] == "1"):
+        elif (maze[j][i] == "#"):
             return False
 
     return True
 
-
-def findEnd(maze, moves):
+def findNextPos(maze,  moves):
     for index in range(len(maze)):
         for x, pos in enumerate(maze[index]):
-            if pos == "P":
+            if pos == "O":
                 start = x
-                start_ = index
+        #maze[index][x] = " "
 
     i = start
-    j = start_
+    j = 0
     for move in moves:
         if move == "L":
             i -= 1
@@ -86,7 +111,8 @@ def findEnd(maze, moves):
         elif move == "D":
             j += 1
 
-    if maze[j][i] == "2":
+    if  len(moves) == 3:
+        maze[j][i] == "O"
         print("Found: " + moves)
         printMaze(maze, moves)
         return True
@@ -94,40 +120,52 @@ def findEnd(maze, moves):
     return False
 
 
-def readFILE(arr,path):
-    pos = []
-    global height, width
-    file = open(path, "r")
-    hw = []
-    hw.append(file.readline().split())
-    height = int(hw[0][0])
-    width = int(hw[0][1])
-    l = 1
-    for line in file:
-        if l <= width:
-            arr.append(line.split())
-            l = l + 1
-        else:
-            pos.append(line.split())
+def findEnd(maze, moves):
+    for index in range(len(maze)):
+        for x, pos in enumerate(maze[index]):
+            if pos == "O":
+                start = x
 
-    for y in range(len(arr)):
-        for x in range(len(arr[y])):
-            if int(pos[0][0]) == y and int(pos[0][1]) == x:
-                arr[y][x] = "P"
+    i = start
+    j = 0
+    for move in moves:
+        if move == "L":
+            i -= 1
 
-    file.close()
-    return
+        elif move == "R":
+            i += 1
+
+        elif move == "U":
+            j -= 1
+
+        elif move == "D":
+            j += 1
+
+    if maze[j][i] == "X":
+        print("Found: " + moves)
+        printMaze(maze, moves)
+        return True
+
+    return False
+
 
 # MAIN ALGORITHM
+
 nums = queue.Queue()
 nums.put("")
 add = ""
-maze = []
-readFILE(maze, "input.txt")
-# print(maze)
-while not findEnd(maze, add): #nếu chưa chạm đích thì tiếp tục
-    add = nums.get()
-    for j in ["L", "R", "U", "D"]:
-        put = add + j
-        if valid(maze, put):
-            nums.put(put)
+add1 = ""
+maze = createMaze2()
+
+while not findEnd(maze, add):
+
+    nums1 = queue.Queue()
+    nums1.put("")
+    while not findNextPos(maze, add1):
+        add1 = nums1.get()
+        # print(add)
+        for j in ["L", "R", "U", "D"]:
+            put = add1 + j
+            if valid(maze, put):
+                nums1.put(put)
+                nums.put(put)
