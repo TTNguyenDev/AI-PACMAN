@@ -51,6 +51,7 @@ class Ghost(turtle.Turtle):
         self.shape("ghost 1.gif")
         self.penup()
         self.speed(0)
+
 class Score(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
@@ -149,41 +150,24 @@ def readFILE(arr,path,pos,coins1):
                 coins1.append((y,x))
     file.close()
     return
+
 def writeFile(starttime,endtime,map="",level="", _lengh=""):
     f=open("output.txt","a")
     res=endtime-starttime
     f.writelines("Map "+map+" level "+level+": "+str(res)+" lengh: " + _lengh +"\n")
     f.close()
-def updateScore():
-    global scores
-    s = turtle.Turtle()
-    s.hideturtle()
-    s.penup()
-    s.goto(-110,-260)
-    while True:
-        score =Score()
-        s.write(str(scores), move=False, align="center", font=("Arial", 36, "normal"))
-        s.color("yellow")
-        scores +=1
-        time.sleep(0.5)
-        s.clear()
 
 def levelscore(add):
     global scores
-    i =5
     s = turtle.Turtle()
     s.hideturtle()
     s.penup()
-    s.goto(-110, -260)
-    while i> 0:
-        score = Score()
-        s.write(str(scores), move=False, align="center", font=("Arial", 36, "normal"))
-        s.color("yellow")
-        scores = 20 -(len(add)-1)
-        time.sleep(0.5)
-        s.clear()
-        i-=1
-
+    s.goto(-160, -270)
+    scores = scores + 20 - len(add)
+    s.color("yellow")
+    s.write("Score:" + str(scores), move=False, align="center", font=("Arial", 36, "normal"))
+    time.sleep(2)
+    s.clear()
 
 def valid(map, moves):
     column, row = updatePacmanPosition(map, moves)
